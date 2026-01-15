@@ -248,7 +248,7 @@ class WebUSBReceiptPrinter extends ReceiptPrinterDriver {
 			});
 			
 			if (device) {
-				await this.#open(device);
+				await this.open(device);
 			}
 		}
 		catch(error) {
@@ -266,11 +266,11 @@ class WebUSBReceiptPrinter extends ReceiptPrinterDriver {
 		}
 
 		if (device) {
-			await this.#open(device);
+			await this.open(device);
 		}
 	}
 
-	async #open(device) {
+	async open(device) {
 		this.#device = device;
 
 		this.#profile = DeviceProfiles.find(
