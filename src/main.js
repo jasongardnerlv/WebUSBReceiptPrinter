@@ -242,17 +242,14 @@ class WebUSBReceiptPrinter extends ReceiptPrinterDriver {
 	}
 
 	async connect() {
-		try {
-			let device = await navigator.usb.requestDevice({ 
-				filters: DeviceProfiles.map(i => i.filters).reduce((a, b) => a.concat(b))
-			});
-			
-			if (device) {
-				await this.open(device);
-			}
-		}
-		catch(error) {
-			console.log('Could not connect! ' + error);
+		let device = await navigator.usb.requestDevice({
+			filters: DeviceProfiles.map(i => i.filters).reduce((a, b) => a.concat(b))
+		});
+
+		if (device) {
+			await this.open(device);
+		} else {
+			throw new Error('Could not connect! No device available');
 		}
 	}
 
